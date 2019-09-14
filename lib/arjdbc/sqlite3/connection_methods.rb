@@ -52,7 +52,7 @@ ArJdbc::ConnectionMethods.module_eval do
     if ':memory:' != database
       config[:database] = File.expand_path(database, Rails.root) if defined?(Rails.root)
       dirname = File.dirname(database)
-      Dir.mkdir(dirname) unless File.directory?(dirname)
+      Dir.mkdir(dirname) rescue Errno::EEXIST
     end
   end
 
